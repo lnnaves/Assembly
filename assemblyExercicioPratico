@@ -1,0 +1,70 @@
+add rdx,rbx,rdx = rdx+rbx
+
+mov eax,[a]
+mov ebx, [b]
+mov ecx, [c]
+mov edx, eax; rdx = a
+add edx, ebx; rdx = a+b
+add edx, ecx; rdx = a+b+c
+mov [aux], edx
+
+//assembly
+
+extern printf
+extern scanf
+
+SECTION .data
+
+str0 db "Entre com a: ", 0
+str1 db "Entre com b: ", 0
+str2 db "Entre com c: ", 0
+str3 db "%d", 0
+str4 db "a é maior que b", 13, 10, 0
+str5 db "a é maior que c", 13, 10, 0 ;terminar de arrumar
+str6 db "c é o maior", 13, 10, 0
+str7 db "todos são iguais", 13, 10, 0
+
+
+SECTION .bss
+a resd 1
+b resd 1
+c resd 1
+
+SECTION .text
+global main 
+main: 
+    push rbp
+    mov rbp, rsp 
+    mov rdi, str0
+    mov rax, 0
+    call printf
+    
+    mov rdi, str3
+    lea rsi, [a]
+    call scanf
+    
+    mov rdi, str3
+    lea rsi, [b]
+    call scanf
+    
+    mov rdi, str3
+    lea rsi, [c]
+    call scanf
+    
+    mov eax, [a]
+    mov ebx, [b]
+    mov ecx, [c]
+    cmp eax, ebx
+    jle ELSE_EXT
+    mov, rdi, str4 
+    mov rax, 0
+    call printf
+    jmp FIM_IF_EXT
+    
+    ELSE_EXT:
+    mov eax, [a]
+    mov ebx, [b]
+    
+   ;terminar código, ver exemplo do exercicio
+    
+    
